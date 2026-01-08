@@ -198,7 +198,9 @@ def main():
     with st.spinner("Loading data..."):
         #original_df, _, product_cat_df = load_data()
         import pandas as pd
-        original_df = pd.read_parquet("C:/Users/mohamedh/Downloads/OJC projects/2025/10 October/Walmart refund analysis/cancellation results/new results 26-12/seller_cancellation_merged_1.parquet")
+        #original_df = pd.read_parquet("C:/Users/mohamedh/Downloads/OJC projects/2025/10 October/Walmart refund analysis/cancellation results/new results 26-12/seller_cancellation_merged_1.parquet")
+        original_df = pd.read_parquet("walmart_vendor_score_analysis/seller_cancellation_merged_1.parquet")
+    
     
     # Ensure ordered date
     import pandas as pd
@@ -1976,3 +1978,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

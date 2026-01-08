@@ -497,8 +497,8 @@ def main():
         
         final_df[confcat_cols] = final_df[confcat_cols].fillna(0)
 
-        product_categorization_fragility = pd.read_parquet("C:/Users/mohamedh/Downloads/OJC projects/2025/10 October/Walmart refund analysis/data/product categorization nlm.parquet")
-        product_categorization_fragility_3 = pd.read_parquet("C:/Users/mohamedh/Downloads/OJC projects/2025/10 October/Walmart refund analysis/data/product categorization nlm rest.parquet")
+        product_categorization_fragility = pd.read_parquet("walmart_vendor_score_analysis/product categorization nlm.parquet")
+        product_categorization_fragility_3 = pd.read_parquet("walmart_vendor_score_analysis/product categorization nlm rest.parquet")
 
         product_categorization_fragility_final = pd.concat(
             [product_categorization_fragility, product_categorization_fragility_3],
@@ -1978,4 +1978,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 

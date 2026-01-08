@@ -1432,6 +1432,18 @@ def main():
         # ---------------------------------
         # GEMINI CALL WITH FAILOVER
         # ---------------------------------
+        def build_fallback_factor_names(var_to_factor):
+            """
+            Fallback naming if Gemini fails.
+            Generates Factor_1, Factor_2, ... based on detected factors.
+            """
+            factor_ids = sorted(set(var_to_factor.values()))
+            return {
+                fac: f"{fac.replace('Factor', 'Factor_')}"
+                for fac in factor_ids
+            }
+
+        
         def get_factor_names_with_fallback(prompt, api_keys):
             last_error = None
 
@@ -1498,10 +1510,22 @@ def main():
         # ---------------------------------
         # RUN
         # ---------------------------------
-        factor_names = get_factor_names_with_fallback(prompt, API_KEYS)
+        #factor_names = get_factor_names_with_fallback(prompt, API_KEYS)
 
-        print("\nGenerated factor names:")
+        #print("\nGenerated factor names:")
+        #print(factor_names)
+
+        try:
+            factor_names = get_factor_names_with_fallback(prompt, API_KEYS)
+            source = "Gemini"
+        except RuntimeError as e:
+            print("⚠️ Gemini failed. Falling back to default factor names.")
+            factor_names = build_fallback_factor_names(var_to_factor)
+            source = "Fallback"
+        
+        print(f"\nGenerated factor names ({source}):")
         print(factor_names)
+
 
         outcome_var = "overall_SCP"
 
@@ -1978,6 +2002,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
